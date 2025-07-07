@@ -25,7 +25,7 @@ A full-stack **Quote Management System** built using **ASP.NET Core** with a **S
 - **ORM**: Entity Framework Core
 - **Authentication**: ASP.NET Identity
 - **IDE**: Visual Studio 2022
-- **Frontend**: Razor Pages or MVC Views (depending on implementation)
+- **Frontend**: MVC Views 
 
 ---
 
