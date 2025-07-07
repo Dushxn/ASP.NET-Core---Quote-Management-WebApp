@@ -1,0 +1,123 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container mt-5">
+    <div class="page-header fade-in">
+        <h1 class="page-title">
+            <i class="fas fa-sign-in-alt"></i>
+            Welcome Back
+        </h1>
+        <p class="page-subtitle">Sign in to access your quote collection</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6" style="margin: 0 auto;">
+            <div class="card fade-in">
+                <div class="card-body">
+                    <form id="account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Email" class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username"
+                                   aria-required="true" placeholder="Enter your email address" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Password" class="form-label">
+                                <i class="fas fa-lock"></i>
+                                Password
+                            </label>
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password"
+                                   aria-required="true" placeholder="Enter your password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                <label class="form-check-label" asp-for="Input.RememberMe">
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+
+                        <button id="login-submit" type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+
+                        <div class="text-center">
+                            <div class="mb-2">
+                                <a id="forgot-password" asp-page="./ForgotPassword" class="text-primary">
+                                    <i class="fas fa-question-circle"></i>
+                                    Forgot your password?
+                                </a>
+                            </div>
+                            <div class="mb-2">
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-primary">
+                                    <i class="fas fa-user-plus"></i>
+                                    Create a new account
+                                </a>
+                            </div>
+                            <div>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-primary">
+                                    <i class="fas fa-envelope-open"></i>
+                                    Resend email confirmation
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                {
+                    <div class="card mt-4 fade-in">
+                        <div class="card-body text-center">
+                            <h5 class="mb-3">
+                                <i class="fas fa-share-alt"></i>
+                                Or sign in with
+                            </h5>
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit" class="btn btn-outline-primary" name="provider" value="@provider.Name"
+                                                title="Log in using your @provider.DisplayName account">
+                                            @provider.DisplayName
+                                        </button>
+                                    }
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card mt-4 fade-in">
+                        <div class="card-body text-center">
+                            <p class="text-muted mb-0">
+                                <i class="fas fa-info-circle"></i>
+                                No external authentication services are configured.
+                            </p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

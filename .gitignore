@@ -1,0 +1,87 @@
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Visual Studio specific
+.vs/
+.vscode/
+*.dbmdl
+*.bak
+*.backup
+*.log
+*.tlog
+*.ide
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider
+.idea/
+
+# SQL/Database files (optional - depending on your usage)
+*.mdf
+*.ldf
+*.ndf
+*.sql
+*.sqlite
+
+# MySQL credentials/configs (only if you have stored DB configs)
+appsettings.json
+app.config
+*.env
+
+# Crash dumps and logs
+*.stackdump
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+*.db
+*.pid
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Other IDEs
+*.DotSettings.user
+
+# Publish output
+publish/
+
+# Windows image thumbs
+Thumbs.db
+
+# Compiled DLLs
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Backup and restore folders
+Backup*/
+Restore*/
+
+# Other
+*.DS_Store

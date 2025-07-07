@@ -1,0 +1,96 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<div class="container mt-5">
+    <div class="page-header fade-in">
+        <h1 class="page-title">
+            <i class="fas fa-user-shield"></i>
+            Personal Data
+        </h1>
+        <p class="page-subtitle">Manage your personal information and data privacy</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card fade-in">
+                <div class="card-body">
+                    <h5 class="mb-3">
+                        <i class="fas fa-cog"></i>
+                        Account Settings
+                    </h5>
+                    <partial name="_ManageNav" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card fade-in">
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5 style="margin-bottom: 0.5rem;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Important Information
+                        </h5>
+                        <p style="margin: 0;">
+                            Your account contains personal data that you have provided to us. This page allows you to download or delete that data.
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card text-center">
+                                <div class="feature-icon primary">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <h6 style="margin-bottom: 1rem;">Download Your Data</h6>
+                                <p style="color: var(--gray-600); margin-bottom: 1.5rem;">
+                                    Get a copy of all your personal data in a downloadable format.
+                                </p>
+                                <form id="download-data" asp-page="DownloadPersonalData" method="post">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-download"></i>
+                                        Download Data
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="feature-card text-center">
+                                <div class="feature-icon danger" style="background: rgba(220, 38, 38, 0.1); color: var(--danger);">
+                                    <i class="fas fa-trash-alt"></i>
+                                </div>
+                                <h6 style="margin-bottom: 1rem;">Delete Account</h6>
+                                <p style="color: var(--gray-600); margin-bottom: 1.5rem;">
+                                    Permanently remove your account and all associated data.
+                                </p>
+                                <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Delete Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger mt-4">
+                        <h6 style="margin-bottom: 0.5rem;">
+                            <i class="fas fa-warning"></i>
+                            Warning
+                        </h6>
+                        <p style="margin: 0;">
+                            <strong>Deleting your account will permanently remove all your data, including your quotes collection. This action cannot be undone.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,155 @@
+﻿@model QuotesWebApp.Models.Quotes
+
+@{
+    ViewData["Title"] = "Create Quote";
+}
+
+<div class="container mt-5">
+    <div class="page-header fade-in">
+        <h1 class="page-title">
+            <i class="fas fa-plus"></i>
+            Create New Quote
+        </h1>
+        <p class="page-subtitle">Add an inspiring quote to your collection</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8" style="margin: 0 auto;">
+            <div class="card fade-in">
+                <div class="card-body">
+                    <form asp-action="Create" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Quote" class="form-label">
+                                <i class="fas fa-quote-right"></i>
+                                Quote Text
+                            </label>
+                            <textarea asp-for="Quote" class="form-control" rows="4"
+                                      placeholder="Enter the inspiring quote here..." required></textarea>
+                            <span asp-validation-for="Quote" class="text-danger"></span>
+                            <div class="form-text">
+                                Share the exact words that inspire you
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Auther" class="form-label">
+                                <i class="fas fa-user"></i>
+                                Author
+                            </label>
+                            <input asp-for="Auther" class="form-control"
+                                   placeholder="Who said this quote?" required />
+                            <span asp-validation-for="Auther" class="text-danger"></span>
+                            <div class="form-text">
+                                The person who originally said or wrote this quote
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="description" class="form-label">
+                                <i class="fas fa-align-left"></i>
+                                Description (Optional)
+                            </label>
+                            <textarea asp-for="description" class="form-control" rows="3"
+                                      placeholder="Add context or explain why this quote is meaningful..."></textarea>
+                            <span asp-validation-for="description" class="text-danger"></span>
+                            <div class="form-text">
+                                Optional: Add context or personal thoughts about this quote
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                                Back to Collection
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i>
+                                Create Quote
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="mb-3">
+                    <i class="fas fa-lightbulb me-2 text-warning"></i>
+                    Tips for Adding Great Quotes
+                </h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Double-check the quote for accuracy
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Include the full name of the author
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Add meaningful context in the description
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Choose quotes that truly inspire you
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Form validation and enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input, textarea');
+
+            // Add real-time validation feedback
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.checkValidity()) {
+                        this.classList.add('is-valid');
+                        this.classList.remove('is-invalid');
+                    } else {
+                        this.classList.add('is-invalid');
+                        this.classList.remove('is-valid');
+                    }
+                });
+            });
+
+            // Character counter for quote text
+            const quoteTextarea = document.querySelector('#Quote');
+            if (quoteTextarea) {
+                const counter = document.createElement('div');
+                counter.className = 'form-text text-end';
+                counter.innerHTML = '<i class="fas fa-keyboard me-1"></i><span id="char-count">0</span> characters';
+                quoteTextarea.parentNode.appendChild(counter);
+
+                quoteTextarea.addEventListener('input', function() {
+                    document.getElementById('char-count').textContent = this.value.length;
+                });
+            }
+        });
+    </script>
+}

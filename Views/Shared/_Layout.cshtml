@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuotesWebApp</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <!-- Brand -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-quote-left"></i>
+                    QuotesWebApp
+                </a>
+
+                <!-- Desktop Navigation -->
+                <ul class="navbar-nav">
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Quotes" asp-action="Index">
+                            <i class="fas fa-quote-right"></i>
+                            Quotes
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Quotes" asp-action="ShowSearchForm">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Section -->
+                <div class="user-section">
+                    <partial name="_LoginPartial" />
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="navbar-toggler" type="button" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="navbar-collapse" id="mobileNav">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a class="nav-link" asp-area="" asp-controller="Quotes" asp-action="Index">
+                    <i class="fas fa-quote-right"></i>
+                    Quotes
+                </a>
+                <a class="nav-link" asp-area="" asp-controller="Quotes" asp-action="ShowSearchForm">
+                    <i class="fas fa-search"></i>
+                    Search
+                </a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <i class="fas fa-shield-alt"></i>
+                    Privacy
+                </a>
+
+                <!-- Mobile User Section -->
+                <div class="user-section">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('show');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navbar = document.querySelector('.navbar');
+            const mobileNav = document.getElementById('mobileNav');
+            const toggler = document.querySelector('.navbar-toggler');
+
+            if (!navbar.contains(event.target) && mobileNav.classList.contains('show')) {
+                mobileNav.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

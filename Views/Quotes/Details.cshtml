@@ -1,0 +1,54 @@
+﻿@model QuotesWebApp.Models.Quotes
+
+@{
+    ViewData["Title"] = "Quote Details";
+}
+
+<div class="container mt-5">
+    <div class="page-header fade-in">
+        <h1 class="page-title">
+            <i class="fas fa-eye"></i>
+            Quote Details
+        </h1>
+        <p class="page-subtitle">View the complete information about this quote</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8" style="margin: 0 auto;">
+            <div class="quote-card fade-in" style="margin-bottom: 2rem;">
+                <div class="quote-text">
+                    @Html.DisplayFor(model => model.Quote)
+                </div>
+                <div class="quote-author">
+                    — @Html.DisplayFor(model => model.Auther)
+                </div>
+                @if (!string.IsNullOrEmpty(Model.description))
+                {
+                    <div class="quote-description">
+                        <strong>About this quote:</strong><br>
+                        @Html.DisplayFor(model => model.description)
+                    </div>
+                }
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-body text-center">
+                    <div class="action-buttons justify-content-center">
+                        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i>
+                            Edit Quote
+                        </a>
+                        <a asp-action="Index" class="btn btn-outline-primary">
+                            <i class="fas fa-list"></i>
+                            Back to Collection
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                            Delete Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
